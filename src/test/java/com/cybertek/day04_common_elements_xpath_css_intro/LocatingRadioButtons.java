@@ -10,13 +10,13 @@ public class LocatingRadioButtons {
     //  That's the only attribute special about the element
     // we can use additional method called isSelected() to determine if it's checked
 
-    // open chrome navigate here http://practice.cybertekschool.com/radiobuttons
+    // open chrome navigate here http://practice.cybertekschool.com/radio_buttons
 
     public static void main(String[] args) {
-        // open chrome navigate here http://practice.cybertekschool.com/radiobuttons
+        // open chrome navigate here http://practice.cybertekschool.com/radio_buttons
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver() ;
-        driver.get("http://practice.cybertekschool.com/radiobuttons");
+        driver.get("http://practice.cybertekschool.com/radio_buttons");
 
 
     }
