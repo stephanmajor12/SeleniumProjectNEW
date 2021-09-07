@@ -26,6 +26,14 @@ public class FindElementByCssSelector {
 //        WebElement searchbox = driver.findElement(By.cssSelector("input[id='yschsp']"));
         WebElement searchbox = driver.findElement(By.cssSelector("input[name='p'][type='text'] "));
         searchbox.sendKeys("CSS SELECTOR");
+        //<button id="sbq-clear" type="button" class="sbq-x">
+        //          <span class="sprite"></span>
+        //</button>
+        // the x icon
+        WebElement clearIcon = driver.findElement(By.cssSelector("button#sbq-clear>span"));
+        clearIcon.click();
+
+        // identify the search icon using css selector
 
 
 
