@@ -8,7 +8,7 @@
   |---	        |---	                        |---	            |
   |0 Matches   	|  `NoSuchElement` Exception 	|  return empty `List<WebElement>`    	            |
   |1 Matches   	|   return `WebElement` object	|  return `List<WebElement>` with `size()` 1 	|
-  |2+ Matches   	|   return first`WebElement` object	| return  `List<WebElement>` 	|
+  |2+ Matches   |   return first`WebElement` object	| return  `List<WebElement>` 	|
 
 --- 
 
@@ -59,7 +59,7 @@ blueRadioBtn.click(); // click it
 
 
 ```java
-List<&#60;>WebElement> radioBtnGroup = driver.findElements(By.name("color")) ;
+List<WebElement> radioBtnGroup = driver.findElements(By.name("color")) ;
 // count how many radio button in radio group with name color
 
 System.out.println("radioBtnGroup.size() = " + radioBtnGroup.size());  
@@ -162,7 +162,94 @@ multiSelectObj.deselectAll();
 </div>
 ```
 
-## Find Element By CssSelector
+## Locating Element(s) By CssSelector
+In CSS, selectors are patterns used to select the element(s) you want to style.
+
+  <a target="_blank" href="https://www.w3schools.com/cssref/css_selectors.asp">CSS Selector Reference</a> </br>
+  <a target="_blank" href="https://www.w3schools.com/cssref/trysel.asp">CSS Selector Tester</a>
+
+### Few examples of Css Selector
+- Selecting `tags`
+  - `h1` :  all `h1` elements
+  - `h1, input, select` : all `<h1>` `<input>` `<select>` elements
+  - `div > button` : all buttons directly under parent `<div>` element
+  - `div button` : all `<button>` elements inside `<div>`
+  - `ul + p` : all `<p>` elements next to `<ul>`
+  - `ul ~ table` : all `<table>` elements that are siblings of a `<ul>` element
+- Hash `#` for ID
+  - `#LastName` : element with `ID` attribute value = `LastName`
+- Dot `.` for class
+  - `.group` : element with `class` attribute value = `group`
+  - `p.cool` : `<p>` element with `class` attribute value = `cool`
+  - `.class1.class2` : element with `class` attribute value = `class1 class2`
+- Combining with comma `,`
+  - `#LastName , .group` : element with `ID` value = `LastName` and `class` attribute value = `group`
+
+### Few examples of Css Selector using Attributes 
+- Explitly specifying attributes
+  - `[id]` : all elements with an `id` attribute.
+  - `[id='pretty-cool']` : all elements with an `id` attribute = `pretty-cool`. (same as `#pretty-cool`)
+  - `[title='cool stuff']` : all elements with `title` attribute = `cool stuff`
+  - `[title^='cool']` : all elements with `title` attribute start with `cool`
+  - `[title$='stuff']` : all elements with `title` attribute end with `stuff`
+  - `[title~='stuff']` : all elements with `title` attribute contains `stuff`
+
+  - `h1[title='cool stuff']` : all `<h1>` elements with `title` attribute = `cool stuff`
+  - `input[type='text']` : all `<input>` element with `type` attribute = `text`
+  - `input[type='checkbox'][name='vehicle1']` : `<input>` element with `type` attribute = `checkbox` and `name` attribute = `vehicle1`
+- and more
+
+### Testing out directly in Browser
+You may inspect any element to open dev tab in chrome and activate test box
+- `Command` + `F` on Mac 
+- `Control` + `F` on Windows
+  <img width="992" alt="The test box in chrome" src="https://user-images.githubusercontent.com/59104509/132441910-8a4e1ef4-e1c5-4750-8c4a-426a93e2c2b5.png">
+It will give you 3 option to search 
+- Just String (useless in our case)
+- Css Selector 
+- Xpath
+![Open_Css_Xpath_Test_box_in_chrome](https://user-images.githubusercontent.com/59104509/132441561-6d2dfcfb-84c4-454f-b53c-00c8c1f89477.gif)
 
 
-## Find Element By XPath
+
+
+### Code Example 
+Given the html snippet from [Swag Lab Practice site](https://www.saucedemo.com/),
+
+```html
+<div class="form_group">
+  <input class="input_error form_input" 
+         placeholder="Username" type="text" 
+         data-test="username" id="user-name" 
+         name="user-name" value="standard_user">
+</div>
+```
+Here is few ways we can identify element(s) using `Css Selector`
+
+- Any element with `id` value of `user-name` 
+  ```java
+  WebElement usernameBox1 = driver.findElement(By.cssSelector("#user-name"))
+  ```
+- input element with id attribute username in explicit way
+  ```java
+  WebElement usernameBox2 = driver.findElement(By.cssSelector("input[id='user-name']"))
+  ```
+- input element with `name` attribute value `user-name` 
+  ```java
+  WebElement usernameBox3 = driver.findElement(By.cssSelector("input[name='user-name']"))
+  ```
+- input element with `data-test` attribute value `username`
+  ```java
+  WebElement usernameBox4 = driver.findElement(By.cssSelector("input[data-test='username']"))
+  ```
+- input element with `id` value `user-name` right under div parent
+  ```java
+  WebElement usernameBox5 = driver.findElement(By.cssSelector("div>input#user-name"))
+  ```
+- input element with `type` attribute value `text` and `placeholder` attribute value `data-test`
+  ```java
+  WebElement usernameBox6 = driver.findElement(By.cssSelector("input[type='text'][placeholder='Username']"))
+  ```
+
+  
+## Locating Element(s) By XPath
