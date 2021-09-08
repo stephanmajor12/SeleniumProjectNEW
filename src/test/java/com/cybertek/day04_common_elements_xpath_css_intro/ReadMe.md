@@ -33,7 +33,7 @@ if( ! checkbox1.isSelected() ){
     System.out.println("checkbox 1 is already selected");
 }
 ```
-[Here](../day04_common_elements_xpath_css_intro/LocatingCheckBoxes.java) is the full code.
+[Here](LocatingCheckBoxes.java) is the full code.
 
 
 ### Working with Radio Buttons
@@ -68,7 +68,7 @@ System.out.println("radioBtnGroup.size() = " + radioBtnGroup.size());
 radioBtnGroup.get(2).click() // click on radio button at index 2
 ```
 
-[Here](../day04_common_elements_xpath_css_intro/LocatingRadioButtons.java) is the full code.
+[Here](LocatingRadioButtons.java) is the full code.
 
 
 ### Working with Dropdown List Single Item 
@@ -97,7 +97,7 @@ Select selectObj = new Select(dropdownElm) ;
     - `value` : `selectObj.selectByValue("2");`
     - `VisibleText` : `selectObj.selectByVisibleText("Option 1");`
 
-[Here](../day04_common_elements_xpath_css_intro/LocatingDropDownList.java) is the full code.
+[Here](LocatingDropDownList.java) is the full code.
 
 
 
@@ -146,7 +146,7 @@ multiSelectObj.deselectByIndex(2);
 multiSelectObj.deselectByValue("java");
 multiSelectObj.deselectAll();
 ```
-[Here](../day04_common_elements_xpath_css_intro/LocatingAndSelectingMutiDropdown.java) is the full code. 
+[Here](LocatingAndSelectingMutiDropdown.java) is the full code. 
 
 ### Working with "Unusual" Dropdown
 
@@ -165,7 +165,7 @@ multiSelectObj.deselectAll();
     </div>
 </div>
 ```
-[Here](../day04_common_elements_xpath_css_intro/SelectingFromFakeDropdown.java) is how we dealt with above 
+[Here](SelectingFromFakeDropdown.java) is how we dealt with above 
 so-called "dropdown" that actually created from `select` tag just using regular element identification. 
 
 
@@ -260,7 +260,7 @@ Here is few ways we can identify element(s) using `Css Selector`
   WebElement usernameBox6 = driver.findElement(By.cssSelector("input[type='text'][placeholder='Username']"))
   ```
 
-[Here](../day04_common_elements_xpath_css_intro/FindElementByCssSelector.java) is another example we did in class 
+[Here](FindElementByCssSelector.java) is another example we did in class 
 
 The Html for search box and clear(x) icon
 ```html
@@ -363,20 +363,52 @@ Given Below HTML
 </html>
 ```
 
-There are two types of XPath 
+There are two types of XPath : 
 - **Absolute (full) XPath**
   - similar to the idea of full file path in computer : `C:\Users\You\Desktop\Selenium\Something.java`
   - full path for username box : `/html/body/div/div[0]/form/input[0]`
     - It starts with single forward slash `/` . 
+    - It's fragile because the entire hierarchy must exactly match, or it will break.
     - `0` here indicate index
     - Attributes can be specified using `elementTag[@attributeName='attributeValue']` syntax.
+    - Code example : `driver.findElement(By.xpath("/html/body/div/div[0]/form/input[0]"));`
 
 - **Relative XPath**
   - similar to short file path `\\Desktop\Selenium\Something.java`
-  - relative path for username box : `//input[@id='username']`
+  - relative path for username box : `//input[@id='username']` or simply `//*[@id='username']`
     - It starts with double forward slash `//` . 
+    - It's flexible because as long as the relative part match , it does not care about parent elements hierarchy.
+    - `//*[@id='username']` : `*` means any element tag here 
     - Attributes can be specified using `elementTag[@attributeName='attributeValue']` syntax.
+    - You can specify multiple hierarchy like this `//form//input[@id='username']`
+      - an `input` element with `id` value `username` **any level** under `form` element 
+    - Code example : `driver.findElement(By.xpath("//input[@id='username']"));`
+ 
+
+You can test out your XPath before running your code directly in browser just like you did for `CSS Selector`
 
 
 
+XPath has useful function to use `text` value which can not be done using `css selector` or any other findElement technic (other than linkText). 
 
+For example 
+- in order to get an `<span>` element with text value `Test Automatin Practice`, 
+- You can use below this XPath : `//span[text()='Test Automatin Practice']`
+- Here is how code look like : 
+  ```java
+  WebElement spanElm = driver.findElement(By.xpath("//span[text()='Test Automation Practice']"))
+  ```
+- If we want to be more specific and say it's under a `<h1>` tag here is how it looks like. 
+  ```java
+  WebElement spanElm = driver.findElement(By.xpath("//h1/span[text()='Test Automation Practice']"))
+  ```
+
+[Here](FindElementByXPath_Intro.java) is the full practice we did in class. 
+
+XPath can do literally anything that all other locators can do. 
+
+We will continue to learn more about XPath and Css Selector in upcoming classes. 
+
+## Homework 
+
+Try redoing all the in class tasks and homework tasks using `CSS Selector` and `XPath`
