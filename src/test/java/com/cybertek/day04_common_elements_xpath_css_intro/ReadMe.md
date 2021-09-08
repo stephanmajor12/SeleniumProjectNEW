@@ -320,8 +320,9 @@ The html for search icon
 Here is the few examples of using attributes and parent child relationship
 ```java
 WebElement searchIcon = driver.findElement(By.cssSelector("span[title='Search']"));
-// EXTRAS
+// EXTRAS :  span with title value search and class value ico-syc mag-glass
 WebElement searchIcon = driver.findElement(By.cssSelector("span[title='Search'][class='ico-syc mag-glass']"));
+WebElement searchIcon = driver.findElement(By.cssSelector("span.ico-syc.mag-glass[title='Search']"));
 // span with title attribute value "Search" directly under a button with class value "sbb"
 WebElement searchIcon = driver.findElement(By.cssSelector("button.sbb>span[title='Search']"));
 // span with title attribute value "Search" directly under an element with type attribute value "submit"
@@ -330,3 +331,52 @@ WebElement searchIcon = driver.findElement(By.cssSelector("[type='submit']>span[
 
   
 ## Locating Element(s) By XPath
+
+**XPath** stands for XML Path Language. 
+
+XPath can be used to navigate through elements and attributes in an HTML or XML document.
+
+Here is [full doc](https://www.w3schools.com/xml/xpath_intro.asp). 
+It uses XML and yet it works the same for html. 
+
+XPath is advanced locating technic with lots of powers.
+
+Given Below HTML
+```html
+<html>
+<body>
+<div id="content">
+  <div>
+    <form id="cool_form">
+      <label for="username">Enter username</label>
+      <input id="username"type="text">
+      <label for="passwd">Enter username</label>
+      <input id="passwd"type="password">
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+  <div>
+    This is second div under parent div
+  </div>
+</div>
+</body>
+</html>
+```
+
+There are two types of XPath 
+- **Absolute (full) XPath**
+  - similar to the idea of full file path in computer : `C:\Users\You\Desktop\Selenium\Something.java`
+  - full path for username box : `/html/body/div/div[0]/form/input[0]`
+    - It starts with single forward slash `/` . 
+    - `0` here indicate index
+    - Attributes can be specified using `elementTag[@attributeName='attributeValue']` syntax.
+
+- **Relative XPath**
+  - similar to short file path `\\Desktop\Selenium\Something.java`
+  - relative path for username box : `//input[@id='username']`
+    - It starts with double forward slash `//` . 
+    - Attributes can be specified using `elementTag[@attributeName='attributeValue']` syntax.
+
+
+
+
