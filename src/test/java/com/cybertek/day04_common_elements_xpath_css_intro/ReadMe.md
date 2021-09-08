@@ -33,6 +33,7 @@ if( ! checkbox1.isSelected() ){
     System.out.println("checkbox 1 is already selected");
 }
 ```
+[Here](../day04_common_elements_xpath_css_intro/LocatingCheckBoxes.java) is the full code.
 
 
 ### Working with Radio Buttons
@@ -67,6 +68,9 @@ System.out.println("radioBtnGroup.size() = " + radioBtnGroup.size());
 radioBtnGroup.get(2).click() // click on radio button at index 2
 ```
 
+[Here](../day04_common_elements_xpath_css_intro/LocatingRadioButtons.java) is the full code.
+
+
 ### Working with Dropdown List Single Item 
 Assuming that this is an `<Select>` element with below options
 
@@ -93,7 +97,7 @@ Select selectObj = new Select(dropdownElm) ;
     - `value` : `selectObj.selectByValue("2");`
     - `VisibleText` : `selectObj.selectByVisibleText("Option 1");`
 
-
+[Here](../day04_common_elements_xpath_css_intro/LocatingDropDownList.java) is the full code.
 
 
 
@@ -112,8 +116,8 @@ Assuming that this is an `<Select>` element with below options
   </select>
   ```
 You can select more than one item in this type of dropdown by holding down to
-- `Command` key on mac
-- `Control` key on windows
+- `Command` key on Mac
+- `Control` key on Windows
 - and select items
 
 ```java
@@ -124,7 +128,7 @@ multiSelectObj.selectByValue("java");
 multiSelectObj.selectByVisibleText("JavaScript");
 ```
 
-> Additional methods Methods available in Select class
+> Additional Methods available in Select class
 - deselect by
     - `index` : `multiSelectObj.deselectByIndex(1);`
     - `value` : `multiSelectObj.deselectByValue("2");`
@@ -142,7 +146,7 @@ multiSelectObj.deselectByIndex(2);
 multiSelectObj.deselectByValue("java");
 multiSelectObj.deselectAll();
 ```
-
+[Here](../day04_common_elements_xpath_css_intro/LocatingAndSelectingMutiDropdown.java) is the full code. 
 
 ### Working with "Unusual" Dropdown
 
@@ -161,6 +165,9 @@ multiSelectObj.deselectAll();
     </div>
 </div>
 ```
+[Here](../day04_common_elements_xpath_css_intro/SelectingFromFakeDropdown.java) is how we dealt with above 
+so-called "dropdown" that actually created from `select` tag just using regular element identification. 
+
 
 ## Locating Element(s) By CssSelector
 In CSS, selectors are patterns used to select the element(s) you want to style.
@@ -203,13 +210,15 @@ In CSS, selectors are patterns used to select the element(s) you want to style.
 You may inspect any element to open dev tab in chrome and activate test box
 - `Command` + `F` on Mac 
 - `Control` + `F` on Windows
+
   <img width="992" alt="The test box in chrome" src="https://user-images.githubusercontent.com/59104509/132441910-8a4e1ef4-e1c5-4750-8c4a-426a93e2c2b5.png">
+
 It will give you 3 option to search 
 - Just String (useless in our case)
 - Css Selector 
 - Xpath
-![Open_Css_Xpath_Test_box_in_chrome](https://user-images.githubusercontent.com/59104509/132441561-6d2dfcfb-84c4-454f-b53c-00c8c1f89477.gif)
 
+  ![Open_Css_Xpath_Test_box_in_chrome](https://user-images.githubusercontent.com/59104509/132441561-6d2dfcfb-84c4-454f-b53c-00c8c1f89477.gif)
 
 
 
@@ -250,6 +259,74 @@ Here is few ways we can identify element(s) using `Css Selector`
   ```java
   WebElement usernameBox6 = driver.findElement(By.cssSelector("input[type='text'][placeholder='Username']"))
   ```
+
+[Here](../day04_common_elements_xpath_css_intro/FindElementByCssSelector.java) is another example we did in class 
+
+The Html for search box and clear(x) icon
+```html
+<div id="sbq-wrap" class="sbq-w">
+  <input type="text" class="sbq" id="yschsp" name="p" value="" autocomplete="off">
+  <button id="sbq-clear" type="button" class="sbq-x sa-hidden">
+    <span class="sprite"></span>
+  </button>
+  <span class="sep"></span>
+</div>
+```
+>Search box Try different way , by id , by name and parent child relationship 
+```java
+// few ways to identify search box with css selector
+WebElement searchbox = driver.findElement(By.cssSelector("#yschsp"));
+WebElement searchbox = driver.findElement(By.cssSelector("input[name='p']"));
+WebElement searchbox = driver.findElement(By.cssSelector("input[id='yschsp']"));
+WebElement searchbox = driver.findElement(By.cssSelector("input[name='p'][type='text']"));
+// EXTRAS   : an element with id value yschsp under another element with id sbq-wrap
+WebElement searchbox = driver.findElement(By.cssSelector("#sbq-wrap>#yschsp"));
+// EXTRAS   : an element with id value yschsp under another div element with class sbq-w
+WebElement searchbox = driver.findElement(By.cssSelector("div.sbq-w>#yschsp"));
+
+searchbox.sendKeys("CSS SELECTOR");
+```
+> Clear icon (span): Try different way , by id , by name and parent child relationship
+```java
+// few ways to identify clear icon with css selector
+// span element with class attribute sprite
+WebElement clearIcon = driver.findElement(By.cssSelector("span.sprite")); // risky not so unique
+WebElement clearIcon = driver.findElement(By.cssSelector("span[class='sprite']")); // risky not so unique
+// span element under an element with id value of sbq-clear
+WebElement clearIcon = driver.findElement(By.cssSelector("#sbq-clear>span"));
+WebElement clearIcon = driver.findElement(By.cssSelector("div[id='sbq-clear']>span"));
+
+// span element under an button element with id value of sbq-clear
+WebElement clearIcon = driver.findElement(By.cssSelector("button#sbq-clear>span"));
+// span element with class attribute sprite under an button element with id value of sbq-clear
+WebElement clearIcon = driver.findElement(By.cssSelector("button#sbq-clear>span.sprite"));
+
+//more specific : 
+// any span element with class attribute sprite anywhere under parent div with id value sbq-wrap
+// for direct child we use > and for child or grand child use space
+WebElement clearIcon = driver.findElement(By.cssSelector("div#sbq-wrap span.sprite"));
+
+// even more specific : using 3 level hierarchy
+WebElement clearIcon = driver.findElement(By.cssSelector("div#sbq-wrap>button#sbq-clear>span.sprite"));
+//and so on
+clearIcon.click();
+```
+The html for search icon 
+```html
+<button class="sbb" type="submit" tabindex="2">
+  <span role="button" title="Search" class="ico-syc mag-glass"></span>
+</button>
+```
+Here is the few examples of using attributes and parent child relationship
+```java
+WebElement searchIcon = driver.findElement(By.cssSelector("span[title='Search']"));
+// EXTRAS
+WebElement searchIcon = driver.findElement(By.cssSelector("span[title='Search'][class='ico-syc mag-glass']"));
+// span with title attribute value "Search" directly under a button with class value "sbb"
+WebElement searchIcon = driver.findElement(By.cssSelector("button.sbb>span[title='Search']"));
+// span with title attribute value "Search" directly under an element with type attribute value "submit"
+WebElement searchIcon = driver.findElement(By.cssSelector("[type='submit']>span[title='Search']"));
+```
 
   
 ## Locating Element(s) By XPath
