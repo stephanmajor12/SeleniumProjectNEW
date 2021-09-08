@@ -422,6 +422,8 @@ XPath can do literally anything that all other locators can do.
 
 We will continue to learn more about XPath and Css Selector in upcoming classes. 
 
+[Here](Update_XPath_Css_CheatSheet.pdf) is the full document you can use as reference. 
+
 ## Homework 
 
 Try redoing all the in class tasks and homework tasks using `CSS Selector` and `XPath`
