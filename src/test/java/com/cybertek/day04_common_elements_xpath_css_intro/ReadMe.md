@@ -38,6 +38,10 @@ if( ! checkbox1.isSelected() ){
 
 ### Working with Radio Buttons
 
+Radio buttons created using `input` tag and attribute `type="radio"`
+
+They can be grouped by `name` attribute and only one option can be selected per group at a time.
+
 Assuming that we have below radio button groups
 ```html
 <input type="radio" id="red" name="color" checked>
@@ -193,7 +197,7 @@ In CSS, selectors are patterns used to select the element(s) you want to style.
   - `#LastName , .group` : element with `ID` value = `LastName` and `class` attribute value = `group`
 
 ### Few examples of Css Selector using Attributes 
-- Explitly specifying attributes
+- Explicitly specifying attributes
   - `[id]` : all elements with an `id` attribute.
   - `[id='pretty-cool']` : all elements with an `id` attribute = `pretty-cool`. (same as `#pretty-cool`)
   - `[title='cool stuff']` : all elements with `title` attribute = `cool stuff`
@@ -363,7 +367,7 @@ Given Below HTML
 </html>
 ```
 
-There are two types of XPath : 
+### Types of XPath : 
 - **Absolute (full) XPath**
   - similar to the idea of full file path in computer : `C:\Users\You\Desktop\Selenium\Something.java`
   - full path for username box : `/html/body/div/div[0]/form/input[0]`
@@ -387,9 +391,16 @@ There are two types of XPath :
 
 You can test out your XPath before running your code directly in browser just like you did for `CSS Selector`
 
+<img width="1272" alt="Testing XPath" src="https://user-images.githubusercontent.com/59104509/132450039-43b3acf1-2736-4730-ae4e-3cf5aa941692.png">
 
 
-XPath has useful function to use `text` value which can not be done using `css selector` or any other findElement technic (other than linkText). 
+### Using XPath functions
+XPath has useful function to use `text` value 
+which can not be done using `css selector` or any other findElement technic (other than linkText). 
+
+Text is not attribute of element, so unlike attribute where we use `//elementTag[@attributeName='attributeValue']`,
+
+This is the syntax for `text` function : `//elementTag[text()='The Black Element Text']`
 
 For example 
 - in order to get an `<span>` element with text value `Test Automatin Practice`, 
@@ -402,6 +413,8 @@ For example
   ```java
   WebElement spanElm = driver.findElement(By.xpath("//h1/span[text()='Test Automation Practice']"))
   ```
+
+There are more useful functions like `contains`, `starts-with` , `ends-with` and so on
 
 [Here](FindElementByXPath_Intro.java) is the full practice we did in class. 
 
