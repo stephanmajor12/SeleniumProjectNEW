@@ -16,14 +16,14 @@ public class XPathPractice1 {
 
         driver.get("http://practice.cybertekschool.com/forgot_password");
 
-        // locate 2 elements using xpath
+        // locate header element using xpath
         WebElement forgetPasswordHeader = driver.findElement(By.xpath("//h2[ text() = 'Forgot Password']"));
         System.out.println("forgetPasswordHeader.getText() = " + forgetPasswordHeader.getText());
-
+        // locate input box element using xpath
         WebElement emailBox = driver.findElement(By.xpath("//input[ @name='email' and @type='text']")) ;
         emailBox.sendKeys("someone@somewhere.com");
 
-
+        // locate button element using xpath
         WebElement retrieveBtn = driver.findElement(By.xpath("//button[@id='form_submit' and @class='radius']"));
         retrieveBtn.click();
 
