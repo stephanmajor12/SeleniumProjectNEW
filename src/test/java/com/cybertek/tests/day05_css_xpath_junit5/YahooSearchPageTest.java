@@ -1,7 +1,7 @@
 package com.cybertek.tests.day05_css_xpath_junit5;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +12,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class YahooSearchPageTest {
 
+    WebDriver driver ;
+
+    @BeforeAll
+    public static void setUpDriver(){
+        WebDriverManager.chromedriver().setup();
+    }
+
+    @BeforeEach
+    public void setupWebDriver(){
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+    }
+
+    @AfterEach
+    public void closeBrowser(){
+        driver.quit();
+    }
+
+    @AfterAll
+    public static void teardown(){
+        System.out.println("@After all , nothing to do here");
+    }
 
     // write 2 tests :
     // testYahooSearchHomePageTitle
@@ -22,16 +44,11 @@ public class YahooSearchPageTest {
     @Test
     public void testYahooSearchHomePageTitle(){
 
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
         driver.get("https://search.yahoo.com/");
 
         String expectedTitle = "Yahoo Search - Web Search" ;
         String actualTitle = driver.getTitle();
 
-        // quit the browser here , because we already saved the title
-        driver.quit();
         // do static import, so you can do this
         // import static org.junit.jupiter.api.Assertions.*;
         assertEquals(expectedTitle,actualTitle ) ;
@@ -46,9 +63,6 @@ public class YahooSearchPageTest {
     @Test
     public void testYahooSearchResultPageTitle(){
 
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
         driver.get("https://search.yahoo.com/");
 
         // identify search box and enter selenium , and hit Enter key on keyboard
@@ -60,8 +74,6 @@ public class YahooSearchPageTest {
 //        String expectedTitleStartWith = "Selenium" ;
         String actualTitle = driver.getTitle() ;
 
-        // quit the browser
-        driver.quit();
         // assert the title starts with Selenium
         assertTrue( actualTitle.startsWith("Selenium")  );
 
