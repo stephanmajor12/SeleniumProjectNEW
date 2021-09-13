@@ -29,11 +29,27 @@ public class XPathPractice1 {
 
         // use xpath to identify confirmation message
         //Your e-mail's been sent!
-        //h4[@name='confirmation_message' and text()='Your e-mail's been sent!']
-        WebElement confirmationMsg = driver.findElement(By.xpath("//h4[@name='confirmation_message' and text()=\"Your e-mails been sent!\"]")) ;
+        /**
+         * Couple xpath we can try to get this confirmation header element 
+         *  //h4[@name='confirmation_message' and text()='Your e-mail's been sent!']
+         *  //h4[@name='confirmation_message']
+         *  //h4[text()='Your e-mail's been sent!']
+         *  //h4[.='Your e-mail's been sent!']
+         *  
+         */
+        String confirmationLocatorStr = "//h4[text()=\"Your e-mail's been sent!\"]" ;
+        System.out.println("confirmationLocatorStr = " + confirmationLocatorStr);
+
+
+        WebElement confirmationMsg = driver.findElement(By.xpath( confirmationLocatorStr ) ) ;
         System.out.println("confirmationMsg.getText() = " + confirmationMsg.getText());
 
+//WebElement confirmationMsg = driver.findElement(By.xpath( "//h4[text()=\"Your e-mail's been sent!\"]" ) ) ;
+        
+//        WebElement confirmationMsg = driver.findElement(By.xpath("//h4[@name='confirmation_message' and text()=\"Your e-mails been sent!\"]")) ;
+//        System.out.println("confirmationMsg.getText() = " + confirmationMsg.getText());
 
+        driver.quit();
     }
 
 }
