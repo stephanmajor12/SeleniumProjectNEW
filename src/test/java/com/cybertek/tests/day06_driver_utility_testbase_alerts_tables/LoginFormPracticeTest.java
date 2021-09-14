@@ -1,8 +1,7 @@
-package com.cybertek.tests.day06_junit_practice_utiliy_methods;
+package com.cybertek.tests.day06_driver_utility_testbase_alerts_tables;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;

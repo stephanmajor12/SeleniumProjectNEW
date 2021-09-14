@@ -1,11 +1,9 @@
-package com.cybertek.tests.day06_junit_practice_utiliy_methods;
+package com.cybertek.tests.day06_driver_utility_testbase_alerts_tables;
 
 import com.cybertek.utility.TestBase;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.concurrent.TimeUnit;
 
 public class SlowElementTest extends TestBase {
 

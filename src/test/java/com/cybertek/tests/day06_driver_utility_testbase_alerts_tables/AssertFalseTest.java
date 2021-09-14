@@ -1,4 +1,4 @@
-package com.cybertek.tests.day06_junit_practice_utiliy_methods;
+package com.cybertek.tests.day06_driver_utility_testbase_alerts_tables;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
