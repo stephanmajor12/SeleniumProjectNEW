@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginFormPracticeTest {
 
@@ -50,7 +51,20 @@ public class LoginFormPracticeTest {
         WebElement successMsg = driver.findElement(By.xpath(" //div[@id='flash']"));
         // assertion
         String expectedResult = "You logged into a secure area!" ;
-        assertEquals(expectedResult , successMsg.getText() );
+//        assertEquals(expectedResult , successMsg.getText() );
+        assertTrue( successMsg.getText().startsWith(expectedResult) );
+
+        //div[ contains( text() , 'You logged into a secure area!') ]
+        // use isDisplay() method to check an element is displayed on the screen
+        // It's only used for an element that you have already identified
+
+        System.out.println("successMsg.isDisplayed() = " + successMsg.isDisplayed());
+
+        String xpathStr = "//div[ contains( text() , 'You logged into a secure area!') ]" ;
+        WebElement successMsg2 = driver.findElement(By.xpath(xpathStr)) ;
+
+        assertTrue(   successMsg2.isDisplayed()  );
+
 
     }
 
