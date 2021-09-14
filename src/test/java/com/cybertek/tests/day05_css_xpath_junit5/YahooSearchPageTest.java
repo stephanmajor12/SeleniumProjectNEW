@@ -67,7 +67,7 @@ public class YahooSearchPageTest {
 
         // identify search box and enter selenium , and hit Enter key on keyboard
         WebElement searchBox = driver.findElement(By.xpath("//input[@name='p']"));
-        // we can simulate keystroke usinh Keys.SELECT_ONE_OF_THE_OPTION
+        // we can simulate keystroke using Keys.SELECT_ONE_OF_THE_OPTION
         // In this case we are typing selenium and hitter enter
         searchBox.sendKeys("Selenium" + Keys.ENTER);
 
