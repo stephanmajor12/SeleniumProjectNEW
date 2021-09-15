@@ -1,0 +1,145 @@
+Today's Schedule
+
+   - JUnit5
+   - TestBase
+   - WebDriverFactory
+   - ImplicitWait vs Thread.sleep
+   - moneyGaming Task
+   - Locating Dynamic Elements
+   - Xpath vs CSS
+   - Alerts
+
+
+  == JUnit5 ==
+  - it is a UNIT TESTING FRAMEWORK
+  - write and run repetable automated TCs
+  - JUnit allows us to run, organize tCs , it can assertions
+  - NO more main method
+
+  Is Junit the only unit test framework ?
+
+  - Java -- TestNG - JUnit5
+  - Python -- PyTest
+  - C# -- Nunit
+  ...
+  ..
+
+
+  Annotations
+    - Used for change behaviour of method
+
+  Common Annotations
+
+    @Test
+        - This will make Java method a JUnit test
+        - Every test will run independently (default)
+        - If one test is fail ,it will not effect other ones
+
+    @BeforeEach/@AfterEach
+        - This annotions will run method ONCE before/after @Test
+        - we can store here re-usable code
+                - driver setuop
+                - waits
+                - quit/close driver
+
+    @BeforeAll/@AfterAll
+
+        - Regardless of how many test cases we have , this code will RUN ONLY ONCE
+
+
+ Assertions
+    - Verify actual and expected
+    - it will a result (PASS OR FAIL)
+
+
+NOTE :- Whether test case fail or not , before and after annotations will executed always
+
+      - If assertions fail Rest of the line after assertion in same testwill not executed
+
+        @Test
+        public void test1(){
+        code fragment
+        Assertions.assertTrue(false);   // fail
+        code fragment will not run
+
+        }
+
+
+TestBase
+    -  TestBase is a class we create it as parent of all tests
+    -  To store all common logic
+    -  Why make it abstract ?
+            - Because we want to avoid object creation from this class
+
+
+
+WebDriverFactory
+    - Used for create driver Object according to browserType
+
+
+Implicit Wait
+
+    - This wait only works for before findElement EVERYTIME.So we can put it inside BeforeEach
+    - This is a selenium waits
+    - It will wait until element is located
+
+findElement
+
+        1- if element is found it wil return WebElement
+        2- if element is not found
+            - it will check ImplicitlyWait
+                YES : it will keep trying to locate element up to time  we set
+                    - if it finds it inside this time it will return WebElemnt
+                    - Otherwise it  will throw NSE (No Such Element)
+
+                NO :  it  will throw NSE (No Such Element)
+
+
+Thread.sleep vs Implicit Wait
+
+Thread.sleep
+    - it comes from Java
+    - it will wait whole duration (it is static )
+
+Implicit Wait
+    - it comes from Selenium
+    - it is dynamic wait
+
+
+XPATH vs CSS
+
+- Xpath can do more than CSS but xpath is little complex
+- CSS is slightly faster than Xpath in IE
+- CSS is easy to write and read (clear syntax )
+
+
+1 - Locating elements with text
+    XPATH : //tagNAme[. or text()='Value']
+    CSS   :  NA
+
+2- Css can not find drom matches based on index (different parents )
+    XPATH : (Xpath Formula)[indexNumber]
+    CSS   : it is not allowed
+
+3- CSS can not locate child to parent
+    XPATH : /.. --> move to Parent
+    CSS   :    NA
+
+
+Alerts
+
+    1- HTML Alerts
+        - We can handle as regular way
+
+    2- Js Alerts
+        - We need to use Alert interface from Selenium to handle
+        - type of Js Alert
+            1- Information  --> ONLY accept
+            2- Confirmation --> Accept or Dismiss
+            3- Prompt       --> accept / sendkeys / dismiss
+
+            getText()   -- > we can use for all them
+
+
+
+
