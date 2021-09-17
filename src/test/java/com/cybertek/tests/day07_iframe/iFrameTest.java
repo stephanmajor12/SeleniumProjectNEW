@@ -13,13 +13,13 @@ public class iFrameTest extends TestBase {
         driver.get("http://practice.cybertekschool.com/iframe");
 
         // locate the <p> element inside iframe
-
-        // first we need to switch to the iFrame
-//        //-- by index (index in java starts with 0, we are calling java method here)
-//        driver.switchTo().frame(0);
-//        // -- by name or id
-//         driver.switchTo().frame("mce_0_ifr");
-          /** -- by passing iframe WebElement object
+        /**
+          first we need to switch to the iFrame
+          -- by index (index in java starts with 0, we are calling java method here)
+            driver.switchTo().frame(0);
+          -- by name or id
+            driver.switchTo().frame("mce_0_ifr");
+          -- by passing iframe WebElement object
              locate the iframe element by it's title  "Rich Text Area. Press ALT-0 for help."
             css selector locator :
               iframe[title='Rich Text Area. Press ALT-0 for help.']
