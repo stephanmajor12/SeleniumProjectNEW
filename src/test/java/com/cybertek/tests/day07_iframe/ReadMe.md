@@ -1,6 +1,6 @@
 # Day 7
 
-## Recap on [Day 6:](../../day06_driver_utility_testbase_alerts_tables/ReadMe.md)
+## Recap on [Day 6:](../day06_driver_utility_testbase_alerts_tables/ReadMe.md)
 - Using test `Lifecycle` annotations to simplify test class
 - Setting up [TestBase](../../utility/TestBase.java)
 - Setting up [WebDriverFactory](../../utility/WebDriverFactory.java) utility class
@@ -134,6 +134,43 @@ This is the [practice page](http://practice.cybertekschool.com/nested_frames) on
 This [video](https://learn.cybertekschool.com/courses/575/pages/042-iframe-nestedframe-demo?module_item_id=42583) on canvas has showed that 
 how you can simply work with nested frame by switchingTo and switching out of the frame to locate elements inside certain iframe.
 
+Here is the code 
+```java
+    @Test
+    public void test_Nested_iFrame(){
+
+        driver.get("http://practice.cybertekschool.com/nested_frames");
+
+        // main content --> top , bottom frame
+        // top --> left , middle , right frame
+
+        // get the text out of bottom frame
+        driver.switchTo().frame("frame-bottom");
+        WebElement bottomFrmBodyElm = driver.findElement(By.tagName("body"));
+        System.out.println("bottomFrmBodyElm.getText() = " + bottomFrmBodyElm.getText());
+        assertEquals("BOTTOM",bottomFrmBodyElm.getText());
+        // switch out to the parent frame
+//        driver.switchTo().parentFrame();
+          driver.switchTo().defaultContent();
+
+        // go to the middle frame and get the text
+        // first go to top frame then go to middle frame
+        driver.switchTo().frame("frame-top");
+        driver.switchTo().frame("frame-middle");
+        WebElement middleFrameDiv = driver.findElement(By.id("content")) ;
+        System.out.println("middleFrameDiv.getText() = " + middleFrameDiv.getText());
+        assertEquals("MIDDLE",middleFrameDiv.getText());
+        // go to the right frame and get the text
+        driver.switchTo().parentFrame();  // now we are at top frame
+        driver.switchTo().frame("frame-right");
+        WebElement rightFrameBodyElm = driver.findElement(By.tagName("body"));
+        System.out.println("rightFrameBodyElm.getText() = " + rightFrameBodyElm.getText());
+        assertEquals("RIGHT",rightFrameBodyElm.getText());
+        // go back to default content
+        driver.switchTo().defaultContent();
+        
+    }
+```
 
 ## Homework TestCase
 
