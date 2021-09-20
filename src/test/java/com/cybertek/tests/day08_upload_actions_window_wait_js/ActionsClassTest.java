@@ -40,6 +40,21 @@ public class ActionsClassTest extends TestBase {
 
             BrowserUtil.waitFor(3);
 
+            // perform these action in this sequence
+            // , hover over to 1st image , pause 2 second , then second image pause 2 second
+            //  then hover over to 1st image again , pause 2 second  then second image pause 2 second
+            // PERFORM THE ACTION!!!
+            actions.moveToElement(img1Elm).pause(2000)
+                    .moveToElement(img2Elm).pause(2000)
+                    .moveToElement(img1Elm).pause(2000)
+                    .moveToElement(img2Elm).pause(2000)
+                    .perform();
+
+
+
+            //TODO : Homework : get a List<WebElement> containing those 3 images , Iterate over the list to hover over and verify the text
+
+
         }
 
 
