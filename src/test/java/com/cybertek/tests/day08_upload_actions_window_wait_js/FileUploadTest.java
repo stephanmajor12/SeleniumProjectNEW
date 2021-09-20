@@ -1,5 +1,6 @@
 package com.cybertek.tests.day08_upload_actions_window_wait_js;
 
+import com.cybertek.utility.BrowserUtil;
 import com.cybertek.utility.TestBase;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class FileUploadTest extends TestBase {
 
     @Test
-    public void testUpload() throws InterruptedException {
+    public void testUpload(){
 
         driver.get("http://practice.cybertekschool.com/upload");
 
@@ -36,7 +37,9 @@ public class FileUploadTest extends TestBase {
          */
         driver.findElement(By.id("file-submit")).click();
         // TODO: Optionally Assert "File Uploaded!" success message showed up
-        Thread.sleep(2000);
+       // Thread.sleep(2000);
+        BrowserUtil.waitFor(2);
+
         // Success message page :  //h3[.='File Uploaded!']
         WebElement successMsg = driver.findElement(By.xpath("//h3[.='File Uploaded!']"));
         assertTrue( successMsg.isDisplayed() );
