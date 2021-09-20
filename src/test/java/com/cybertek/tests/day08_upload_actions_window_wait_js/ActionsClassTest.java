@@ -4,6 +4,7 @@ import com.cybertek.utility.BrowserUtil;
 import com.cybertek.utility.TestBase;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -82,7 +83,7 @@ public class ActionsClassTest extends TestBase {
         public void testKeyboardAction(){
 
             // navigate to https://www.google.com
-            // hold down to shift enter text "i love selenium"
+            // hold down to shift enter text "i love selenium" YOU SHOULD SEE UPPERCASE
             // release the shift
             // enter text "i love selenium"
             // hold down to command on mac control on windows and enter "A"
@@ -96,7 +97,27 @@ public class ActionsClassTest extends TestBase {
             // keyDown method for holding down to certain modifier key like Control , SHIFT and so on
             // keyUp method for releasing what you are holding down to
             // sendKeys method of Actions class is for pressing key that provided
-            // pause method of Actions class is for pausing in between actions in milleseconds
+            // pause method of Actions class is for pausing in between actions in milliseconds
+
+            // this is way more than enough
+//            actions.keyDown(Keys.SHIFT).sendKeys("i love selenium")
+//                    .pause(2000).keyUp(Keys.SHIFT)
+//                    .sendKeys("i love selenium").pause(2000)
+//                    .keyDown(Keys.COMMAND).sendKeys("A") // command+a on mac will select all text
+//                    .perform();
+
+
+
+            // this is way way way way way more than enough to demonstrate you can take any keyboard action
+            actions.keyDown(Keys.SHIFT).sendKeys("i love selenium")
+                    .pause(2000).keyUp(Keys.SHIFT)
+                    .sendKeys("i love selenium").pause(2000)
+                    .keyDown(Keys.COMMAND).sendKeys("A") // command+a on mac will select all text
+                    // .keyDown(Keys.CONTROL).sendKeys("A") // control+a on windows will select all text
+                    .keyUp(Keys.COMMAND).pause(2000)
+                    .sendKeys(Keys.BACK_SPACE)
+                    .perform();
+
 
 
 
