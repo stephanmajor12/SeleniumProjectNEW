@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ActionsClassTest extends TestBase {
 
@@ -71,6 +71,33 @@ public class ActionsClassTest extends TestBase {
             actions.dragAndDrop(smallCircle, biggerCircle).perform();
 
             BrowserUtil.waitFor(2);
+
+            // verify the big circle text has changed to You did great!
+            assertEquals("You did great!|", biggerCircle.getText() );
+
+
+        }
+
+        @Test
+        public void testKeyboardAction(){
+
+            // navigate to https://www.google.com
+            // hold down to shift enter text "i love selenium"
+            // release the shift
+            // enter text "i love selenium"
+            // hold down to command on mac control on windows and enter "A"
+            // release the command or control key
+            // then hit backspace to delete
+            driver.get(" https://www.google.com");
+            // locate searchBox using name value q
+            WebElement searchBox = driver.findElement(By.name("q"));
+            // create Actions class instance
+            Actions actions = new Actions(driver);
+            // keyDown method for holding down to certain modifier key like Control , SHIFT and so on
+            // keyUp method for releasing what you are holding down to
+            // sendKeys method of Actions class is for pressing key that provided
+            // pause method of Actions class is for pausing in between actions in milleseconds
+
 
 
         }
