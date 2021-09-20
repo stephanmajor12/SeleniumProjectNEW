@@ -74,7 +74,7 @@ public class ActionsClassTest extends TestBase {
             BrowserUtil.waitFor(2);
 
             // verify the big circle text has changed to You did great!
-            assertEquals("You did great!|", biggerCircle.getText() );
+            assertEquals("You did great!", biggerCircle.getText() );
 
 
         }
