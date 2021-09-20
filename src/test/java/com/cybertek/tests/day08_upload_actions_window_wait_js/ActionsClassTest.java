@@ -57,5 +57,21 @@ public class ActionsClassTest extends TestBase {
 
         }
 
+        @Test
+        public void testDragAndDrop(){
 
+            driver.get("https://demos.telerik.com/kendo-ui/dragdrop/index");
+            BrowserUtil.waitFor(2) ;
+
+            WebElement smallCircle = driver.findElement(By.id("draggable"));
+            WebElement biggerCircle= driver.findElement(By.id("droptarget"));
+
+            // dragAndDrop method of Actions class , accept 2 webelemet and drop first one into second one
+            Actions actions = new Actions(driver) ;
+            actions.dragAndDrop(smallCircle, biggerCircle).perform();
+
+            BrowserUtil.waitFor(2);
+
+
+        }
 }
