@@ -79,6 +79,9 @@ public class ActionsClassTest extends TestBase {
 
         }
 
+        // as long as you can hold down to SHIFT and Type something
+        // then release the shift and perform the action
+        // that's all we need.
         @Test
         public void testKeyboardAction(){
 
@@ -122,4 +125,14 @@ public class ActionsClassTest extends TestBase {
 
 
         }
-}
+
+        @Test
+        public void testDoubleClick(){
+            // navigate here
+            //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_ondblclick
+            // double-click on paragraph with text "Double-click this paragraph to trigger a function.
+            // then assert the new paragraph with text "Hello world" displayed right under
+            // both of the elements are under iframe with id iframeResult
+
+        }
+}r
