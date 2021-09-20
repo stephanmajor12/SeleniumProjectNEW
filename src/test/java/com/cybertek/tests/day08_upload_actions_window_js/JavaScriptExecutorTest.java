@@ -57,8 +57,9 @@ public class JavaScriptExecutorTest extends TestBase {
         int myScrollNumber = 1000 ;
         jse.executeScript("window.scrollBy(0, arguments[0]  )" ,  myScrollNumber  )   ;
 
-        // now call arguments[0].scrollIntoView(true)
         WebElement cybetekSchoolLnk = driver.findElement(By.linkText("Cybertek School"));
+        // now call method arguments[0].scrollIntoView(true)
+        // and pass cybetekSchoolLnk element, so it can scroll to the element
 
         jse.executeScript("arguments[0].scrollIntoView(true)" ,  cybetekSchoolLnk  );
 
