@@ -133,6 +133,18 @@ public class ActionsClassTest extends TestBase {
             // double-click on paragraph with text "Double-click this paragraph to trigger a function.
             // then assert the new paragraph with text "Hello world" displayed right under
             // both of the elements are under iframe with id iframeResult
+            driver.get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_ondblclick");
+            BrowserUtil.waitFor(2);
+            // both elements are under the frame , so switch into it first
+            driver.switchTo().frame("iframeResult");
+            WebElement pElm1 =
+                    driver.findElement(By.xpath("//p[.='Double-click this paragraph to trigger a function.']"));
+            // in order to double-click we will use actions class
+            Actions actions = new Actions(driver) ;
+            actions.doubleClick(pElm1).perform(); // this is how we double click
+
+            BrowserUtil.waitFor(2);
+            // TODO : go ahead and assert the Hello world showed up
 
         }
-}r
+}
