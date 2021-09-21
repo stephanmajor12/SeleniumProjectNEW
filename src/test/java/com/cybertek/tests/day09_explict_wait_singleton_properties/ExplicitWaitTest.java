@@ -29,7 +29,6 @@ public class ExplicitWaitTest extends TestBase {
         // for common scenarios, so we don't have to build our own
         // in this case we are checking for title equal Dynamic Title
         //wait.until( ExpectedConditions.titleIs("Dynamic title") );
-
         // try different condition as below
         // wait until the spongebob image visible on screen
         // visibilityOfElementLocated accept locator as parameter
@@ -39,10 +38,37 @@ public class ExplicitWaitTest extends TestBase {
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@alt='square pants']")) ) ;
         // we did static import as below so pur code can be shorter
         // import static org.openqa.selenium.support.ui.ExpectedConditions.*;
-        wait.until( visibilityOfElementLocated(By.xpath("//img[@alt='square pants']")) ) ;
+        //wait.until( visibilityOfElementLocated(By.xpath("//img[@alt='square pants']")) ) ;
 
+        // the warning area initially hast text of this page is slow wait for 5 seconds..
+        // after it load the text of that area become Done!
+        // This is one of the ExpectedConditions we can use for waiting
 
         System.out.println("END");
+
+    }
+
+    @Test
+    public void testByTextToBe(){
+
+        //1. navigate to http://practice.cybertekschool.com/dynamic_loading
+        driver.get(" http://practice.cybertekschool.com/dynamic_loading");
+        //2. Click on Example 7
+        driver.findElement(By.partialLinkText("Example 7")).click();
+
+        WebElement alertArea = driver.findElement(By.id("alert"));
+        System.out.println("alertArea.getText() = " + alertArea.getText());
+
+        WebDriverWait wait = new WebDriverWait(driver, 7);
+        // wait for the image show up
+        wait.until( visibilityOfElementLocated(By.xpath("//img[@alt='square pants']")) ) ;
+        // here we had to re-locate the element because
+        // the attributes has changed (colors and stuff) , driver can not find it anymore
+        // element is not in the dom anymore error
+        alertArea = driver.findElement(By.id("alert"));
+
+        System.out.println("alertArea.getText() = " + alertArea.getText());
+
 
     }
 
