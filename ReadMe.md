@@ -1,6 +1,6 @@
 # Selenium Learning Project 
 
-## Class Notes :
+## [Class Notes](https://ubiquitous-system-377131ac.pages.github.io/) :
 
 * [x] [Day 01 Note](./src/test/java/com/cybertek/day01_navigation_locators/ReadMe.md) 
 * [x] [Day 02 Note](./src/test/java/com/cybertek/day02_locators_practice/ReadMe.md)
