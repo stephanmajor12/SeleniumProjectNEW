@@ -1,4 +1,23 @@
-# Selenium Project 
+# Selenium Learning Project 
+
+## Class Notes :
+
+* [x] [Day 01 Note](./src/test/java/com/cybertek/day01_navigation_locators/ReadMe.md) 
+* [x] [Day 02 Note](./src/test/java/com/cybertek/day02_locators_practice/ReadMe.md)
+* [x] [Day 03 Note](./src/test/java/com/cybertek/day03_locate_by_tag_class_getatt/ReadMe.md)
+* [x] [Day 04 Note](./src/test/java/com/cybertek/day04_common_elements_xpath_css_intro/ReadMe.md)
+* [x] [Day 05 Morning Note](./src/test/java/com/cybertek/day05_css_xpath_junit5//ReadMe.md)
+* [x] [Day 05 Afternoon Note](./src/test/java/com/cybertek/tests/day05_css_xpath_junit5/ReadMe.md)
+* [x] [Day 06 Note](./src/test/java/com/cybertek/tests/day06_driver_utility_testbase_alerts_tables/ReadMe.md)
+* [x] [Day 07 Note](./src/test/java/com/cybertek/tests/day07_iframe/ReadMe.md)
+* [x] [Day 08 Note](./src/test/java/com/cybertek/tests/day08_upload_actions_window_js/ReadMe.md)
+* [ ] [Day 09 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
+* [ ] [Day 10 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
+* [ ] [Day 11 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
+* [ ] [Day 12 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
+
+---
+---
 
 [Selenium](https://selenium.dev) is an open source java library for automating browser. 
 
@@ -9,7 +28,6 @@ Selenium Consists of 3 part
 - Selenium IDE (browser plugin for record playback)
 - **Selenium WebDriver** (programmatic access)
 - **Selenium Grid** (running distributed test in multiple machines) 
---- 
 
 Selenium Clients and WebDriver Language Bindings
 In order to create scripts that interact with browser, 
@@ -25,8 +43,8 @@ Selenium support automation of all major browsers by communicating the browser s
 Each browser vendors like chrome , firefox , safari and edge so on have their own specific driver. 
 
 For example : 
- - chrome has [ChromeDriver](https://chromedriver.chromium.org/) , 
- - firefox has [GeckoDriver](https://github.com/mozilla/geckodriver) , 
+ - Google Chrome has [ChromeDriver](https://chromedriver.chromium.org/) 
+ - Mozilla Firefox has [GeckoDriver](https://github.com/mozilla/geckodriver)  
  - Microsoft Edge has [EdgeDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)
 
 At its minimum, 
@@ -36,11 +54,11 @@ Communication is two-way:
 - ![](https://www.selenium.dev/images/documentation/webdriver/basic_comms.png)
 - We will be using it to automate browser 
 - Additionally, we will use testing framework like Junit to make assertions
---- 
+
 
 # Apache Maven 
 [Apache Maven ](https://maven.apache.org/) 
-is a tool for Java Project management and comprehension tool.
+is a tool for Java Project management and comprehension.
 Based on the concept of a project object model (POM), 
 Maven can manage a project's build, reporting and documentation from a central piece of information.
 
@@ -48,19 +66,22 @@ It has a lot of [features](https://maven.apache.org/maven-features.html) that de
 
 We will focus on one of few core feature that relevant to us to get start easily with selenium. 
 - Simple project setup that follows best practices
+
 ```
 ├── pom.xml
 └── src
-    ├── main
-    │ ├── java
+    ├── main                
+    │ ├── java              // dev use this
     │ └── resources
-    └── test
-        ├── java
+    └── test                
+        ├── java            // test goes here
         └── resources (optionally)
 ```
+
 - **Dependency management**: Maven encourages the use of a [central repository](https://mvnrepository.com/) of JARs and other dependencies. Maven comes with a mechanism that your project's clients can use to download any JARs required for building your project from a central JAR repository.
 
->In Maven, dependency is another archive—JAR, ZIP, and so on—which your current project needs in order to compile, build, test, and/or to run. The dependencies are gathered in the pom. ... If they are not present there, then Maven will download them from a remote repository and store them in the local repository
+>In Maven, dependency is another archive—JAR, ZIP, and so on—which your current project needs in order to compile, build, test, and/or to run. The dependencies are gathered in the pom.
+If they are not present there, then Maven will download them from a remote repository and store them in the local repository
 
 In order to work with selenium we will need `selenium-java` dependency.
 In order to easy manage browser specific drivers we need `WebDriverManager` dependency. 
@@ -77,6 +98,7 @@ These dependencies can be added into `pom.xml` file in the project we are about 
 5. Provide artifact id , same as project name and keep the version tab as is ![Project Detail](https://user-images.githubusercontent.com/59104509/131440859-8de38b61-6cb2-477d-8ecf-09362b9f622f.png)
 6. Click `Finish` to create project , you will be present with `pom.xml` file
 7. You will see content below 
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -93,9 +115,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-
-
-
 </project>
 ```
 8. Now it's time to add dependencies for `selenium-java` and WebDriver manager.
@@ -106,10 +125,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
    
    <dependencies>
 ```
+
 10. Copy and paste the [selenium dependency](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java/3.141.5) 
 and the [WebDriverManager Dependency](https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager/4.4.3) in between. 
 11. Here is the full `pom.xml`
-   ```xml
+   
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
    <project xmlns="http://maven.apache.org/POM/4.0.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -147,12 +168,13 @@ and the [WebDriverManager Dependency](https://mvnrepository.com/artifact/io.gith
    
    
    </project>
-   ```
+```
 
 12. Create a package under `src/test/java` with name `com.cybertek` to match group id you added when creating project.
 13. Create a class called `SeleniumDryRun` and add a main method to test things out.
     ![Folder Structure](https://user-images.githubusercontent.com/59104509/131441768-f6c396db-b5f7-40ba-972a-19cbd60381e6.png)
-14. Add below code and run , chrome browser should open and navigate to google.com
+14. Add below code and run , The Chrome browser should open and navigate to google.com
+
 ```java
 package com.cybertek;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -171,4 +193,5 @@ public class SeleniumDryRun {
     }
 }
 ```
-15. You are all set
+
+15. You are all set.
