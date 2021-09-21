@@ -25,7 +25,7 @@ public class WebOrderTest extends TestBase {
 
          WebOrderUtility.login(driver, "Tester","test");
 
-        System.out.println("is at order page" +   WebOrderUtility.isAtOrderPage(driver)    );
+        System.out.println("is at order page  " +   WebOrderUtility.isAtOrderPage(driver)    );
 
         BrowserUtil.waitFor(2);
 
