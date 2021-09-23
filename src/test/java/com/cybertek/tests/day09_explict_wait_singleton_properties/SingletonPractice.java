@@ -9,7 +9,7 @@ public class SingletonPractice {
     @Test
     public void testOutDriverUtilityClass(){
 
-        Driver.getDriver();
+        Driver.getDriver().get("https://google.com");
 //        Driver.getDriver();
 //        Driver.getDriver();
 //        Driver.getDriver();
