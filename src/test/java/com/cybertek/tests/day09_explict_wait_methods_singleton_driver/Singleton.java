@@ -1,4 +1,4 @@
-package com.cybertek.tests.day09_explict_wait_singleton_properties;
+package com.cybertek.tests.day09_explict_wait_methods_singleton_driver;
 
 /**
  * We want this class to only create one object

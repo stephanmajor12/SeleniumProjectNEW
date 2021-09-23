@@ -1,11 +1,9 @@
-package com.cybertek.tests.day09_explict_wait_singleton_properties;
+package com.cybertek.tests.day09_explict_wait_methods_singleton_driver;
 
 import com.cybertek.utility.BrowserUtil;
 import com.cybertek.utility.TestBase;
 import com.cybertek.utility.WebOrderUtility;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class WebOrderTest extends TestBase {
 

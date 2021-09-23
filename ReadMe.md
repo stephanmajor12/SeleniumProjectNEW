@@ -11,7 +11,7 @@
 * [x] [Day 06 Note](./src/test/java/com/cybertek/tests/day06_driver_utility_testbase_alerts_tables/ReadMe.md)
 * [x] [Day 07 Note](./src/test/java/com/cybertek/tests/day07_iframe/ReadMe.md)
 * [x] [Day 08 Note](./src/test/java/com/cybertek/tests/day08_upload_actions_window_js/ReadMe.md)
-* [ ] [Day 09 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
+* [x] [Day 09 Note](./src/test/java/com/cybertek/tests/day09_explict_wait_methods_singleton_driver/ReadMe.md)
 * [ ] [Day 10 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
 * [ ] [Day 11 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
 * [ ] [Day 12 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
