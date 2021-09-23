@@ -10,6 +10,10 @@ import java.util.concurrent.TimeUnit;
  * This class is meant to be super class
  * to provide driver set up and closing browser
  * for it's subclasses
+ *
+ * // Now you can try to replace driver with
+ * Driver.getDriver() so it can be same driver everywhere wherever you use
+ *
  */
 public abstract class TestBase {
     // we want only subclasses of TestBase have access to this.
