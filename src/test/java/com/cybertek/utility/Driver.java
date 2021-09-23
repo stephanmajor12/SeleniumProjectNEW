@@ -20,6 +20,7 @@ public class Driver {
         if(obj == null){
             WebDriverManager.chromedriver().setup();
             obj = new ChromeDriver();
+            obj.manage().window().maximize();
 //            System.out.println("One and only created for the first time");
             return obj ;
         }else{
