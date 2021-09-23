@@ -28,7 +28,7 @@ public class ExplicitWaitTest extends TestBase {
         // ExpectedConditions helper class has a lot of pre-written conditions
         // for common scenarios, so we don't have to build our own
         // in this case we are checking for title equal Dynamic Title
-        //wait.until( ExpectedConditions.titleIs("Dynamic title") );
+        wait.until( ExpectedConditions.titleIs("Dynamic title") );
         // try different condition as below
         // wait until the spongebob image visible on screen
         // visibilityOfElementLocated accept locator as parameter
@@ -61,9 +61,11 @@ public class ExplicitWaitTest extends TestBase {
 
         WebDriverWait wait = new WebDriverWait(driver, 7);
         // wait for the image show up
-        wait.until( visibilityOfElementLocated(By.xpath("//img[@alt='square pants']")) ) ;
+        //wait.until( visibilityOfElementLocated(By.xpath("//img[@alt='square pants']")) ) ;
+        // wait for alert area text to be "Done!"
+        wait.until( textToBe( By.id("alert"),"Done!") );
         // here we had to re-locate the element because
-        // the attributes has changed (colors and stuff) , driver can not find it anymore
+        // the attributes has changed (colors and stuff) , driver can not find it any more
         // element is not in the dom anymore error
         alertArea = driver.findElement(By.id("alert"));
 
