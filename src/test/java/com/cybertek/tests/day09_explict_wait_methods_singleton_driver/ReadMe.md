@@ -72,7 +72,7 @@ it will just move on instead of completing 10 seconds.
 This will improve the speed since it does not have to finish 10 seconds if element found earlier.
 
 ## Using Custom Wait Condition : Explicit Wait
-Another waiting technic is Explicit Wait. 
+Another waiting technique is Explicit Wait. 
 
 Implicit wait has improved the speed compared to Thead.sleep.
 
@@ -208,8 +208,8 @@ so it's out of question.
 
 We have `WebDriverFactory` class with method `getDriver` to generate `WebDriver` instance.
 However, everytime the method is called it will create new object, 
-and it will open up new browser window different from `TestBase`. 
-Si it's not ideal either 
+and it will open up new browser window different from `TestBase`.
+So it's not ideal either.
 
 > Thought: what if we have another utility class that only generate single WebDriver instance? <br>
 > Hold that thought, we will come back to it. 
@@ -352,15 +352,18 @@ we will have to wait for 10 seconds timeout if element not found.
 
 This is good time to use our explicit wait knowledge we learned earlier. 
 
-So instead of waiting for `NoSuchElementException` , we can use `WebDriverWait` as below. 
-
-Now instead of waiting for 10 seconds, we only wait for maximum 2 seconds. 
+Our objective is : 
+instead of waiting for 10 seconds when element not found, 
+we want to only wait for maximum 2 seconds with explicit wait. 
 And instead of catching `NoSuchElementException` now we can catch `TimeoutException`.
 
 ```java
 WebDriverWait wait = new WebDriverWait(driverParam,2);
 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[normalize-space(.)='List of All Orders']"))) ;
 ```
+
+> `normalize-space` is a xpath function for trimming text. `normalize-space(.)` or `normalize-space( text() )` means trim the inner text of the element then check for equality. 
+> We used this method because there was space before and after text List of All Orders
 
 Here is the full method to demonstrate the change. 
 
@@ -381,10 +384,10 @@ public static boolean isAtOrderPage(WebDriver driverParam){
 }
 ```
 
-## Creating Driver utility 
+## Creating Driver Utility 
 We have made good progress on our selenium utility methods to simplify test code. 
 
-One downside we have observed is :  
+Few items we have observed for improvement :  
 - having to pass `WebDriver driver` parameters in each and every utility method we created. 
 - no other way to easily handle it since only TestBase have driver defined. 
 - need an ability to use same WebDriver instance everywhere. 
@@ -395,16 +398,17 @@ It is a design pattern to create a class that only allow creation of single obje
 If more object creation attempted , it will just return same object. 
 
 It's usually achieved in below 3 steps : 
-- make constructor private (so no new keyword can be used outside class)
+- make constructor private (so no new keyword can be used outside the class)
 - creating private static field (so only one value assigned)
 - public getter for private static field with below condition 
   - check if private static field is null or not
-    - if not --> create new object and assign it to static field
-    - if yes --> return same static field that hold the object.
+    - if not -> create new object and assign it to static field
+    - if yes -> return same static field that hold the object.
 
 Inspired by above singleton pattern (and **without digging too deep into the pattern itself**), 
 
 Let's take a look at how we can re-create our WebDriverFactory to only generate one object.
+Here is what we have: 
 
 ```java
 public class WebDriverFactory {
@@ -437,7 +441,7 @@ All we need to do is, tweak it little by following singleton way :
 - add private constructor
 - add private static filed 
 - add public getter with conditional object creation. 
-- for the sake of simplicity we will just create ChromeDriver 
+- for the sake of simplicity we will just create `ChromeDriver` for now. 
 
 Instead of modifying existing Factory class lets create new class called `Driver`
 
@@ -469,9 +473,9 @@ Now , We have the Driver Utility class that give us single `WebDriver` instance.
 
 Next step will be , use it in `TestBase` and `WebOrderUtility` to see the benefit it brings.
 
-Our objective is we want to use same `WebDriver` instance everywhere. 
+Our objective is to use same `WebDriver` instance everywhere. 
 
-First lets see how we can modify `TestBase`
+First let's see how we can modify `TestBase`
 
 ```java
 import com.cybertek.utility.Driver;
@@ -482,7 +486,7 @@ public abstract class TestBase {
 
   @BeforeEach
   public void setupWebDriver() {
-
+    // Below line is only change
     driver = Driver.getDriver();  //WebDriverFactory.getDriver("chrome");
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
   }
@@ -544,5 +548,5 @@ public class WebOrderUtility {
 
 ```
 
-NO MORE FORCED DRIVER PARAM!! `Driver.getDriver()` INSTEAD !  NEAT!!
+**NO MORE FORCED DRIVER PARAM!!** , Using `Driver.getDriver()` INSTEAD !  NEAT!!
 

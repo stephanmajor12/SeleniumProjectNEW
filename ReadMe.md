@@ -18,6 +18,7 @@
 
 ---
 ---
+<img width="200" alt="selenium_icom" src="https://user-images.githubusercontent.com/59104509/134586246-189cfb25-e1e9-412e-8fb4-1bbbacaaeb75.png">
 
 [Selenium](https://selenium.dev) is an open source java library for automating browser. 
 
