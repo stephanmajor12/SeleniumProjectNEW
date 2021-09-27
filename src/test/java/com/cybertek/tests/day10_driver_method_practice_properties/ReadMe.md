@@ -241,18 +241,18 @@ We can handle the checked exception using try catch as below example.
 ```java
     @Test
 public void testReadTryCatch(){
-        // moving Properties' declaration here so it can be accessible outside try catch
-        Properties properties = new Properties();
-        try {
+      // moving Properties' declaration here so it can be accessible outside try catch
+      Properties properties = new Properties();
+    try {
         FileInputStream in = new FileInputStream("config.properties");
         properties.load(in);
         in.close();
-        } catch (IOException e) {
+    } catch (IOException e) {
         e.printStackTrace();
-        }
+    }
         String helloValue = properties.getProperty("hello") ;
         System.out.println("helloValue = " + helloValue);
-        }
+}
 ```
 
 ### Creating Simple Utility Class
@@ -301,12 +301,12 @@ Now we can simply use the utility class everywhere.
 ```java
   @Test
 public void testUsingConfigReaderUtility(){
-        String webOrderUrl = ConfigReader.read("weborder_url");
-        String username = ConfigReader.read("weborder_username");
-        String password = ConfigReader.read("weborder_password");
-        Driver.getDriver().get( webOrderUrl );
-        // you can use login function with param and use above username passwords
-        }
+    String webOrderUrl = ConfigReader.read("weborder_url");
+    String username = ConfigReader.read("weborder_username");
+    String password = ConfigReader.read("weborder_password");
+    Driver.getDriver().get( webOrderUrl );
+    // you can use login function with param and use above username passwords
+}
 ```
 
 ### Updating `Driver` Utility Class to use Property File
@@ -374,21 +374,58 @@ It's relatively easy to access system properties by using static method provided
 ```java
 @Test
 public void testReadingSystemProperties(){
-        // java home path
-        System.out.println("System.getProperty(\"java.home\") = "
-        + System.getProperty("java.home"));
-        // User working directory
-        System.out.println("System.getProperty(\"user.dir\") = "
-        + System.getProperty("user.dir"));
-        // Operating system name
-        System.out.println("System.getProperty(\"os.name\") = "
-        + System.getProperty("os.name"));
-        // User account name
-        System.out.println("System.getProperty(\"user.name\") = "
-        + System.getProperty("user.name"));
-        // User's home directory
-        System.out.println("System.getProperty(\"user.home\") = "
-        + System.getProperty("user.home"));
-        }
+    // java home path
+    System.out.println("System.getProperty(\"java.home\") = "
+    + System.getProperty("java.home"));
+    // User working directory
+    System.out.println("System.getProperty(\"user.dir\") = "
+    + System.getProperty("user.dir"));
+    // Operating system name
+    System.out.println("System.getProperty(\"os.name\") = "
+    + System.getProperty("os.name"));
+    // User account name
+    System.out.println("System.getProperty(\"user.name\") = "
+    + System.getProperty("user.name"));
+    // User's home directory
+    System.out.println("System.getProperty(\"user.home\") = "
+    + System.getProperty("user.home"));
+}
 ```
+
+
+
+## Java Faker Library for Random Fake Data
+[JavaFaker](https://github.com/DiUS/java-faker) is 
+a library aim to provide random fake data of different kinds and domains 
+for development or testing or any other purposes. 
+
+Sometimes, our tests need some data that does not really need to be stored.
+
+In the meantime, it's also not very ideal to just use same data all the time. 
+We can use javafaker library for generating random test data. 
+
+In order to get started with javafaker we need to first add maven dependency. 
+
+```xml
+<dependency>
+    <groupId>com.github.javafaker</groupId>
+    <artifactId>javafaker</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
+
+Then in java code , 
+```java
+Faker faker = new Faker();
+
+String name = faker.name().fullName(); // Miss Samanta Schmidt
+String firstName = faker.name().firstName(); // Emory
+String lastName = faker.name().lastName(); // Barton
+
+String streetAddress = faker.address().streetAddress(); // 60018 Sawayn Brooks Suite 449
+```
+
+It will generate random fake data in each method call. 
+
+Here is the [full list of items](https://github.com/DiUS/java-faker#fakers) you can generate according to the documentation. 
 
