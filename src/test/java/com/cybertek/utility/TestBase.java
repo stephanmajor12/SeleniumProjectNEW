@@ -34,7 +34,10 @@ public abstract class TestBase {
 
     @AfterEach
     public void closeBrowser(){
-        driver.quit();
+
+        //driver.quit();
+        // quit the browser + make it null, so we can get new one when ask for it again
+        Driver.closeBrowser();
     }
 
 
