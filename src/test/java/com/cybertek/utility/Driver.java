@@ -15,6 +15,10 @@ public class Driver {
 
     private Driver(){ }
 
+    /**
+     * Return obj with only one WebDriver instance
+     * @return same WebDriver if exists , new one if null
+     */
     public static WebDriver getDriver(){
 
         if(obj == null){
@@ -27,6 +31,25 @@ public class Driver {
 //            System.out.println("You have it just use existing one");
             return obj ;
 
+        }
+
+    }
+
+    /**
+     * Quitting the browser and setting the value of
+     * WebDriver instance to null because you can re-use already quitted driver
+     */
+    public static void closeBrowser(){
+
+        // check if we have WebDriver instance or not
+        // basically checking if obj is null or not
+        // if not null
+            // quit the browser
+            // make it null , because once quit it can not be used
+        if(obj != null ){
+            obj.quit();
+            // so when ask for it again , it gives us not quited fresh driver
+            obj = null ;
         }
 
     }
