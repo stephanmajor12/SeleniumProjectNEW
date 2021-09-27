@@ -46,14 +46,19 @@ public class WebOrderPracticeTest extends TestBase {
         //span[. ='Invalid Login or Password.']
 //        WebElement errorMsgElm = driver.findElement(By.xpath("//span[. ='blablanvalid Login or Password.']"));
 //        assertTrue( errorMsgElm.isDisplayed()  );
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver() ,2  ) ;
-        // check of visibility of the errorMsgElm in 2 seconds
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[. ='blablanvalid Login or Password.']")));
-        }catch(TimeoutException e){
-            //System.out.println("The error message is = " + e.getMessage()  );
-            System.out.println("WE DID NOT SEE THE ERROR MESSAGE ELEMENT ");
-        }
+//        WebDriverWait wait = new WebDriverWait(Driver.getDriver() ,2  ) ;
+//        // check of visibility of the errorMsgElm in 2 seconds
+//        try {
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[. ='blablanvalid Login or Password.']")));
+//        }catch(TimeoutException e){
+//            //System.out.println("The error message is = " + e.getMessage()  );
+//            System.out.println("WE DID NOT SEE THE ERROR MESSAGE ELEMENT ");
+//        }
+
+        // check for element exists using the browser util we just created
+        boolean elementFound =
+                BrowserUtil.checkVisibilityOfElement(By.xpath("//span[. ='blablanvalid Login or Password.']"),2);
+        assertTrue( elementFound );
 
     }
 
