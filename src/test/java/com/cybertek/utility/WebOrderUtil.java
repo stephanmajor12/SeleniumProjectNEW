@@ -31,4 +31,23 @@ public class WebOrderUtil {
     }
 
 
+    /**
+     * A method for logging into Web Order practice site from login page
+     *
+     * @param username username for weborder app
+     * @param password password for weborder app
+     */
+    public static void login(String username, String password){
+
+        // enter username
+        Driver.getDriver().findElement(By.id("ctl00_MainContent_username")).sendKeys(username);
+        // enter password
+        Driver.getDriver().findElement(By.id("ctl00_MainContent_password")) .sendKeys(password);
+        // click login
+        Driver.getDriver().findElement(By.id("ctl00_MainContent_login_button")).click();
+
+    }
+
+
+
 }
