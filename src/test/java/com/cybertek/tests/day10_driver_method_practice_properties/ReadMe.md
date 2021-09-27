@@ -62,7 +62,52 @@ public abstract class TestBase {
 }
 ```
 
-### Update [`WebOrderUtility`](../../utility/WebOrderUtility.java) class to use `Driver` utility method
+### Add `closeBrowser` Method to `Driver` Utility. 
+
+We have created Driver utility to 
+provide single WebDriver instances if it's not `null` 
+to ensure use same driver in one test and utilities. 
+
+However, after each test we call `quit` method on driver. 
+In selenium , we can not reuse a WebDriver instance that is already closed and quited.
+
+Since our `getDriver` method only fire up new WebDriver if it's not null, 
+It's necessary to set the value of `driver` to `null` after it quit. 
+
+And we can create a method called `closeDriver` in `Driver` utility class 
+to quit the browser and make it null if it's not already null.
+
+Here is the code we added
+
+```java
+public static void closeBrowser(){
+    // check if we have WebDriver instance or not
+    // basically checking if obj is null or not
+    // if not null
+        // quit the browser
+        // make it null , because once quit it can not be used
+    if(obj != null ){
+        obj.quit();
+        // so when ask for it again , it gives us not quited fresh driver
+        obj = null ;
+    }
+}
+```
+
+Now, we can call this method in `@AfterEach` section of test base 
+to ensure making `driver` to null after quitting. 
+
+```java
+  @AfterEach
+  public void closeBrowser(){ // you can call it anything you want
+      //driver.quit();
+      // quit the browser + make it null, so we can get new one when ask for it again.
+      Driver.closeBrowser();
+  }
+```
+
+
+### Create New [`WebOrderUtil`](../../utility/WebOrderUtil.java) class to use `Driver` utility method
 
 ```java
 package com.cybertek.utility;
@@ -70,7 +115,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WebOrderUtility {
+public class WebOrderUtil {
 
   public static void login(){
     // think about removing duplicate by calling second method
@@ -129,8 +174,15 @@ Few common type of files
 - **csv**(comma separated value) file : `testData.csv`
   - can be opened by excel tools , lightweight plain text
   - columns are separated by `,`(comma)
+  - first row usually serve as column name
+    - ```csv
+      name , batch, gender
+      Nick , b22  ,  Male
+      Maria, b23  , Female
+      Aysu , b23  , Female
+      ```
 - **properties** file : `testData.properties`
-  - key value pair separated by `=` (equal sign)
+  - key value pair separated by `=` (equal sign) or `:` (colon) or space ` `
   - one key value pair per line
   - ```properties
     hello=world
@@ -140,7 +192,7 @@ Few common type of files
     weborder_password=test
     browser=chrome
     ```
-
+    
 - **`YAML` or `YML`** file : `something.yml`
 
 ## Working with Properties File
@@ -162,7 +214,7 @@ As mentioned above, it contains:
   - `=`(equal sign) or
   - `:` (colon) or just space
   - It's recommended not to mix and match , always use `=`.
-  - one key value pair per line
+  - one key value pair per line , **SPACE MATTER!!**
     ```properties
     hello=world
     url=https://google.com
@@ -200,6 +252,7 @@ by using Java built-in type for specifically working with properties : `Properti
     ```
 2. Use the `load` method from `Properties` class to load the properties file you referred in `FileInputStream`
     ```java
+    // load method expect FileInputStream object as parameter and declare to throw IOException
     properties.load(in) ; 
     ```
 3. Use the `getProperty` method from `Properties` class to get the value by providing the key
@@ -208,6 +261,7 @@ by using Java built-in type for specifically working with properties : `Properti
     ```   
 4. `FileInputStream` is a resource need to be closed once it's being used, so it's good to close the resource right after you load into properties file.
     ```java
+   // close method declare to throw IOException 
     in.close(); 
     ```   
 
@@ -240,23 +294,26 @@ We can handle the checked exception using try catch as below example.
 
 ```java
     @Test
-public void testReadTryCatch(){
-      // moving Properties' declaration here so it can be accessible outside try catch
-      Properties properties = new Properties();
-    try {
-        FileInputStream in = new FileInputStream("config.properties");
-        properties.load(in);
-        in.close();
-    } catch (IOException e) {
-        e.printStackTrace();
+    public void testReadTryCatch(){
+          // moving Properties' declaration here so it can be accessible outside try catch
+          Properties properties = new Properties();
+        try {
+            // all 3 lines of code declare to throw IOException 
+            // so wrapping them in try catch block together. 
+            FileInputStream in = new FileInputStream("config.properties");
+            properties.load(in);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+            String helloValue = properties.getProperty("hello") ;
+            System.out.println("helloValue = " + helloValue);
     }
-        String helloValue = properties.getProperty("hello") ;
-        System.out.println("helloValue = " + helloValue);
-}
 ```
 
 ### Creating Simple Utility Class
-Since we decided to store most of configuration data into properties file, lets create a utility to read from `config.properties` file.
+Since **we decided** to store most configuration data into properties file, 
+lets create a utility to read from `config.properties` file.
 
 > You can read any properties file , here we just decided to read from one properties file we decided to use for configuration data.
 
@@ -268,7 +325,7 @@ import java.util.Properties;
 public class ConfigReader {
 
   //In this class we will implement the repeated steps of reading
-  // from configuration.properties file
+  // from config.properties file
   //#1- Create the object of Properties
   private static Properties properties = new Properties();
 
@@ -277,10 +334,8 @@ public class ConfigReader {
     //#3- Get the path and open the file
     try {
       FileInputStream in = new FileInputStream("config.properties");
-
       //#4- Load the opened file into properties object
       properties.load(in);
-
       //closing the file in JVM Memory
       in.close();
 
@@ -289,7 +344,7 @@ public class ConfigReader {
     }
   }
 
-  //#5- Use the object to read from the configuration.properties file
+  //#5- Use the object to read from the config.properties file
   public static String read(String key) {
     return properties.getProperty(key);
   }
@@ -309,12 +364,16 @@ public void testUsingConfigReaderUtility(){
 }
 ```
 
+Here is the [full code](PropertyFileReadTest.java) we did in class. 
+
+Here is [another exercise](SeleniumWithPropertiesTest.java) we did to include selenium.  
+
 ### Updating `Driver` Utility Class to use Property File
 We have been holding out on using browser parameter into our `Driver` utility.
 So we can now read the browser type from the `config.properties` file.
 It will allow us to change browser type in one place and apply everywhere we used `Driver.getDriver`.
 
-Here is how new `Driver` utility class look like.
+Here is how new [`Driver`](../../utility/Driver.java) utility class look like.
 
 ```java
 public class Driver {
@@ -414,7 +473,7 @@ In order to get started with javafaker we need to first add maven dependency.
 </dependency>
 ```
 
-Then in java code , 
+Then in java code ,
 ```java
 Faker faker = new Faker();
 
@@ -423,9 +482,40 @@ String firstName = faker.name().firstName(); // Emory
 String lastName = faker.name().lastName(); // Barton
 
 String streetAddress = faker.address().streetAddress(); // 60018 Sawayn Brooks Suite 449
+
+System.out.println("faker.book().title() = " + faker.book().title());
+System.out.println("faker.book() = " + faker.book().publisher());
+System.out.println("faker.gameOfThrones().character() = " 
+                        + faker.gameOfThrones().character());
+System.out.println("faker.phoneNumber().phoneNumber() = " 
+                        + faker.phoneNumber().cellPhone());
+System.out.println("faker.idNumber().ssnValid() = " 
+                        + faker.idNumber().ssnValid());
+System.out.println("faker.number().numberBetween(1000000000L,5000000000L) = " 
+                        + faker.number().numberBetween(1000000000L, 5000000000L));
+System.out.println("faker.numerify(\"###-###-####\") = " 
+                        + faker.numerify("###-###-####"));
+System.out.println("faker.chuckNorris().fact() = " 
+                        + faker.chuckNorris().fact());
+
 ```
 
-It will generate random fake data in each method call. 
+It will generate random fake data in each method call.
+
+This is the sample result from above code
+
+```text
+faker.book().title() = The Wind's Twelve Quarters
+faker.book().author() = Chad Corkery
+faker.gameOfThrones().character() = Ayra Stark
+faker.phoneNumber().phoneNumber() = 1-899-529-8120
+faker.idNumber().ssnValid() = 006-77-7959
+faker.number().numberBetween(1000000000L,5000000000L) = 1834322790
+faker.numerify("###-###-####") = 950-169-9832
+faker.chuckNorris().fact() = Chuck Norris doesn't need a debugger, he just stares down the bug until the code confesses.
+
+```
+
 
 Here is the [full list of items](https://github.com/DiUS/java-faker#fakers) you can generate according to the documentation. 
 
