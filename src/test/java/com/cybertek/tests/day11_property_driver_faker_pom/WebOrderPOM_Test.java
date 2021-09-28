@@ -7,7 +7,7 @@ import com.cybertek.utility.Driver;
 import com.cybertek.utility.TestBase;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WebOrderPOM_Test extends TestBase {
 
@@ -42,17 +42,19 @@ public class WebOrderPOM_Test extends TestBase {
 
         // now we are at all order page
         WAllOrderPage allOrderPage = new WAllOrderPage();
-
         // assert the header element is displayed
         assertTrue( allOrderPage.header.isDisplayed()  );
 
         allOrderPage.checkAllButton.click();
-
         BrowserUtil.waitFor(2);
 
         allOrderPage.unCheckAllButton.click();
-
         BrowserUtil.waitFor(2);
+
+        // print out the size of headerCells
+        System.out.println("allOrderPage.headerCells.size() = "
+                + allOrderPage.headerCells.size());
+        assertEquals(13, allOrderPage.headerCells.size() );
 
     }
 
