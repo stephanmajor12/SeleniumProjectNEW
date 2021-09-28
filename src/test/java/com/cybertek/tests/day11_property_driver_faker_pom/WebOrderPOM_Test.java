@@ -12,12 +12,15 @@ public class WebOrderPOM_Test extends TestBase {
     @Test
     public void testWithPOM_for_login(){
 
-        Driver.getDriver().get("http://secure.smartbearsoftware.com/samples/TestComplete11/WebOrders/Login.aspx");
+
         WLoginPage loginPage = new WLoginPage();
 
-        loginPage.userNameField.sendKeys("Tester");
-        loginPage.passwordField.sendKeys("test");
-        loginPage.loginButton.click();
+        loginPage.goTo();
+
+//        loginPage.userNameField.sendKeys("Tester");
+//        loginPage.passwordField.sendKeys("test");
+//        loginPage.loginButton.click();
+        loginPage.login("Tester" ,"test");
 
         BrowserUtil.waitFor(4);
 
