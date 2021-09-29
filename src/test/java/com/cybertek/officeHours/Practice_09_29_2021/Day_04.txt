@@ -1,0 +1,161 @@
+Day_04 
+
+Topics 
+
+	- Singleton
+
+		- Singleton Design Pattern:
+			- What is it and how to achieve it?
+			- constrains/limits initialization of class to single instance
+			- a pattern we use  to make sure create only one object of the class
+			- We use it for our Driver utility, so that we can always get the same driver instance everytime we call it.
+
+		What JAVA OOP concept is used here?
+			- Encapsulation
+
+			1- We create private constructor to limit class' object creation.
+			2- We create a getter method so that we return the driver in the way that we want to return. 
+
+		Why do you want to get same driver instance all the time?
+			- When creating tests in different classes with different packages, with different design patterns,
+			 with different logics implemented; we need to make we passing around the exact same driver instance
+			  so that our webdriver knows where to go.
+        if you dont use Singleton design pattern?
+            You need to point that object (WebDriver driver)
+=============================================================================
+
+     - BrowserUtils
+        is it unique your Application, your Project?
+        it is not unique, general method for applications.
+
+=============================================================================
+
+     - Test Base :Contains properties and actions for all the tests
+        in it:
+            Decleration of our variables
+            Before and After Method
+            initaliziing of our driver
+        Nothing related the project. it is general
+        We can use TestBase with little changes with the new application
+        your test extend the TestBase
+
+
+=============================================================================
+
+	- Faker Class
+
+=============================================================================
+
+	- ConfigReader 
+	- config.properties 
+
+			Properties file
+
+		1.Right click on the name of the project
+		2.New->File
+		3.Enter name: configuration.properties
+		4.OK
+	
+	- Properties file works like a control center, we manage our browser, urls, database and couple of user information from those file
+	and it changes values everywhere that we used configuraiton input.
+	It has key and  value structure.
+
+	Creata a properties reader file
+
+		1.Right click on utilities package
+		2.New-->Class
+		3.Enter name: ConfigurationReader
+		4.OK
+
+NOTE : To read, reach value in configuration.properties file, I need CondfigurationReader class which allow us to read properites file type.
+		-> What kind of data properties file store?
+			- key=value
+		-> Why are we reading value from .properties file?
+			- We are trying to avoid hard coding important test data in our source code
+			- Easy to change the flow of running tests when reading from external file
+			- such as; if we want to run on different browser, different environment(url), different usernames etc,
+			 it can be easily achieved with this logic.
+
+	- ConfigurationReader:
+			- We created ConfigurationReader utility class to be able to read from "configuration.properties" file
+			- We have repeated steps (opening file-loading-getProperty) when we read from configuration.properties
+			- To make it easy and re-usable to read from that file, we created our own custom utility class and method.
+
+		- configuration.properties:
+			- We created this file to avoid hard coding in our source code.
+			- We are storing important test data that can change the flow of running our test suite, such as: browser type, environment/url, username, password etc
+			- Data is stored in key = value format
+
+
+
+=============================================================================
+
+
+ POM Design Pattern: 
+
+--> What is POM Design Pattern?
+	- Creating seperate .java classes for the each page of the application.
+	- In these classes we store relevant information to those specific pages.
+	- Such as: web elements and methods.
+
+--> How do we implement POM Design Pattern?
+#1- Create constructor and initialize Object of that class and WebDriver using PageFactory.
+
+	PageFactory.initElements(Driver.getDriver(), this);
+
+	Driver.getDriver()--> returns the current driver instance
+	this --> stands for the object of the current class
+
+	--> After initializing we are able to use the web elements of the current class
+	through the object of the current class.
+
+
+#2- Instead of using findElements(); we use @FindBy annotation 
+	- Using @FindBy annotation, we can still use all of the 8 locators that are coming from Selenium, just as we did with findElements() method.
+
+	@FindBy(xpath="//tagName[@attribute='value']")
+	public WebElement example;
+
+
+--> Why are we implementing POM Design Pattern?
+	- clean code / easy to read
+	- less code
+	- re-usable code / not repeatedly locating web elements throughout
+	- easy to maintain / easy to manage
+	- easy to collaborate with your team
+
+
+
+
+FOLDER STRUCTURE 
+	projectFolder
+		-src
+			-test
+				-java
+					- com.cybertek
+						- pages : where we store .java Pages classes
+						- tests : where we store all of our tests
+						- utilities : we we store all re-usable utility class/methods
+
+
+		-configuration.properties : where we store important test data in key=value 
+		-pom.xml : where we add & manage all dependecies in our project
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

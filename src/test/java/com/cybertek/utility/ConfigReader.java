@@ -12,7 +12,7 @@ import java.util.Properties;
 public class ConfigReader {
 
     // declare Properties object at class level so it can be accessible in static method
-    private static Properties properties = new Properties();
+    private  static  Properties properties = new Properties();
 
     // we want to only load the file once , so we can use static block
     static {

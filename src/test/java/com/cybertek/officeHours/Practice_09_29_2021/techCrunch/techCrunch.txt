@@ -1,0 +1,19 @@
+
+=========  techcrunch ===========
+
+1- Go to https://techcrunch.com
+2- For " The Latest News" list
+        -Verify each news has an author
+        -Verify each news has an image
+
+     Note :
+        - Find the parent locator for each latest news
+        - Use this parent to verify each author and image are displayed on the webpage
+        - When doing this create a  dynamic locator and use for loop
+
+3- Click one of the news from "The Latest News " list to reach the full content
+        - Verify the browser title is the same with the news title
+        - Verify the links within the news content
+
+
+
