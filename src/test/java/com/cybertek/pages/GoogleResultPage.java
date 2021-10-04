@@ -39,5 +39,20 @@ public class GoogleResultPage {
 
     }
 
+    /**
+     *  Print out the text of all the resulting link
+     */
+    public void printAllSearchResultLinks(){
+
+        System.out.println("resultLinks.size() = " + resultLinks.size() );
+
+        for (WebElement eachLinkElm : resultLinks) {
+        // remove empty text with if statement
+            System.out.println("eachLinkElm.getText() = " + eachLinkElm.getText() );
+
+        }
+
+    }
+
 
 }
