@@ -26,11 +26,13 @@ public class GoogleSearchTest extends TestBase {
         // assert the title starts with SDET JOB
         assertTrue( driver.getTitle().startsWith("SDET JOB")    ) ;
 //        assertTrue( Driver.getDriver().getTitle().startsWith("SDET JOB")    ) ;
-
+        // possibly wait little here
         GoogleResultPage resultPage = new GoogleResultPage();
 
         String resultText = resultPage.getResultCountText() ;
         System.out.println("resultText = " + resultText);
+
+        resultPage.printAllSearchResultLinks();
 
         BrowserUtil.waitFor(4);
     }
