@@ -17,12 +17,10 @@ public class GoogleSearchTest extends TestBase {
 
         GoogleHomePage homePage = new GoogleHomePage();
         homePage.goTo();
-
         // assert you are at the homepage
         assertTrue(   homePage.isAt()     );
 
         homePage.searchKeyword("SDET JOB");
-
         // assert the title starts with SDET JOB
         assertTrue( driver.getTitle().startsWith("SDET JOB")    ) ;
 //        assertTrue( Driver.getDriver().getTitle().startsWith("SDET JOB")    ) ;
