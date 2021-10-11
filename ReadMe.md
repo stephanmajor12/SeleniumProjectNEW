@@ -14,7 +14,7 @@
 * [x] [Day 09 Note](./src/test/java/com/cybertek/tests/day09_explict_wait_methods_singleton_driver/ReadMe.md)
 * [x] [Day 10 Note](./src/test/java/com/cybertek/tests/day10_driver_method_practice_properties/ReadMe.md)
 * [x] [Day 11 Note](./src/test/java/com/cybertek/tests/day11_property_driver_faker_pom/ReadMe.md)
-* [ ] [Day 12 Note](./src/test/java/com/cybertek/tests//ReadMe.md)
+* [x] [Day 12 Note](./src/test/java/com/cybertek/tests/day12_pom_practice_review/ReadMe.md)
 
 ---
 ---
