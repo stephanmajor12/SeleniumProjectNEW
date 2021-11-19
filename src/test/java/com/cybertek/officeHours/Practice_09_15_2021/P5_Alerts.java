@@ -1,8 +1,8 @@
 package com.cybertek.officeHours.Practice_09_15_2021;
 
 import com.cybertek.utility.TestBase;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
