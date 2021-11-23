@@ -56,9 +56,8 @@
                         <exclude>WebOrderPracticeTest.java</exclude>
                         <exclude>GoogleSearchTest.java</exclude>
                         <exclude>LibraryTest.java</exclude>
-                        <exclude>a_GoogleLoginTest.java</exclude>
-                        <exclude>GojiLoginTest.java</exclude>
                         <exclude>PatientTest.java</exclude>
+                        <exclude>BackendTest.java</exclude>
                     </excludes>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>

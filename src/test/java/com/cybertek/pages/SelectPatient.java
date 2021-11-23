@@ -57,6 +57,11 @@ public class SelectPatient {
         SelectPatient(patientName2);
         switchPatientID.click();
     }
+    public void deSelectPatient() throws InterruptedException {
+        BrowserUtil.waitFor(2);
+        switchPatientID.click();
+        Driver.getDriver().get(ConfigReader.read("goji.dashboard"));
+    }
 
     private void assertThat(String text, ElementMatcher.Junction<Object> objectJunction) {
         text = objectJunction.toString();
